@@ -1,0 +1,2 @@
+glossary = {}
+print(glossary)
