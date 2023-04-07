@@ -1,0 +1,13 @@
+In Python you can print text to the terminal.
+In Python you can store text and numbers into variables.
+In Python you can concatonate strings and variables.
+In Python you can create and edit lists.
+In Python you can create and edit tuples.
+In Python you can use conditional statements.
+In Python you can create and edit dictionaries.
+In Python you can use for-loops.
+In Python you can use while-loops.
+In Python you can accept user input.
+In Python you can create and edit functions.
+In Python you can create and edit classes.
+In Python you can store and import modules from different files.

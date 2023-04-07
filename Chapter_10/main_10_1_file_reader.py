@@ -1,8 +1,6 @@
 from pathlib import Path
 
-path = Path('chapter_10/pi_digits.txt')
-contents = path.read_text()
+contents = Path('chapter_10/pi_digits.txt').read_text()
 
-lines = contents.splitlines()
-for line in lines:
+for line in contents.splitlines():
     print(line)
