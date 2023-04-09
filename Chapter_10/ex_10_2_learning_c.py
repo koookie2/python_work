@@ -1,6 +1,6 @@
 from pathlib import Path
 
-path = Path('chapter_10/learning_python.txt')
+path = Path('chapter_10/text_learning_python.txt')
 contents = path.read_text().replace('Python', 'C')
 print(contents, end='\n\n')
 
