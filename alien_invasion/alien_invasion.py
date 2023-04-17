@@ -23,6 +23,31 @@ class AlienInvasion:
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
+    
+    def _create_fleet(self):
+        """Create the fleet of alien."""
+        # Create an alien and keep adding aliens until there's no room left.
+        # Spacing between aliens is one alien width and one alien height.
+        alien_width, alien_height = Alien(self).rect.size
+
+        current_x, current_y = alien_width, alien_height
+        while current_y < (self.settings.screen_height - 3 * alien_height):
+            while current_x < (self.settings.screen_width - 2 * alien_width):
+                self.__create_alien(current_x, current_y)
+                current_x += 2 * alien_width
+        
+            # Reset x value and increment y_value
+            current_x = alien_width
+            current_y += 2 * alien_height
+    
+    def __create_alien(self, x_position, y_position):
+        """Create an alien and place it in the fleet."""
+        new_alien = Alien(self)
+        new_alien.rect = (x_position, y_position)
+        self.aliens.add(new_alien)
     
     def run_game(self):
         """Start the main loop for the game."""
@@ -38,9 +63,10 @@ class AlienInvasion:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-            elif event.type == pygame.KEYDOWN:
+            
+            if event.type == pygame.KEYDOWN:
                 self.__check_keydown_events(event)
-            elif event.type == pygame.KEYUP:
+            if event.type == pygame.KEYUP:
                 self.__check_keyup_events(event)
     
     def __check_keydown_events(self, event):
@@ -66,7 +92,7 @@ class AlienInvasion:
         """Respond to key releases."""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
-        elif event.key == pygame.K_LEFT:
+        if event.key == pygame.K_LEFT:
             self.ship.moving_left = False
     
     def _update_bullets(self):
@@ -85,6 +111,7 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.ship.blitme()
+        self.aliens.draw(self.screen)
 
         pygame.display.flip()
 
