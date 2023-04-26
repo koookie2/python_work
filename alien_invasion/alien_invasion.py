@@ -35,12 +35,15 @@ class AlienInvasion:
         # Create an instance to store game statistics.
         self.stats = GameStats(self)
 
+        # Create the game objects
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
 
         self._create_fleet()
         self.current_drop = 0
+
+        self.difficulty = 1
     
     def _create_fleet(self):
         """Create the fleet of alien."""
@@ -97,6 +100,7 @@ class AlienInvasion:
         """Start a new game when the player clicks "Play.\""""
         if not self.game_active:
             # Reset the game statistics.
+            self.settings.initialize_dynamic_settings(self.difficulty)
             self.stats.reset_stat()
             self.game_active = True
 
@@ -116,6 +120,13 @@ class AlienInvasion:
         if event.key == pygame.K_q:
             sys.exit()
         
+        if event.key == pygame.K_e:
+            self.difficulty = 1
+        if event.key == pygame.K_m:
+            self.difficulty = 2
+        if event.key == pygame.K_h:
+            self.difficulty = 3
+
         if event.key == pygame.K_p:
             self._check_play_button()
 
@@ -159,7 +170,9 @@ class AlienInvasion:
             # Destroy existing bullets and create new fleet.
             self.bullets.empty()
             self._create_fleet()
-
+            
+            self.settings.increase_speed()
+    
     def _update_aliens(self):
         """Check if fleet is at an edge, then update positions."""
         on_edge = False
