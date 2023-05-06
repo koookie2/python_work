@@ -55,24 +55,24 @@ class SidewaysBullet(Sprite):
         pygame.draw.rect(self.screen, self.color, self.rect)
 
 # Example 14-2
-class Block(Sprite):
-    """A class to manage bullets fired from the ship."""
+class BLock(Sprite):
+    """A class to manage blocks for the ship to hit."""
 
     def __init__(self, ai_game):
-        """Create a bullet object at the ship's current position."""
         super().__init__()
         self.screen = ai_game.screen
+        self.screen_rect = self.screen.get_rect()
 
         self.rect = pygame.Rect(0, 0, 30, 10)
 
         self.direction = 1
-        
+    
     def update(self):
-        """Move the bullet up the screen."""
-        if (self.rect.x <= 0) or (self.rect.x >= self.screen.get_rect().right):
+        """Move the block left and right."""
+        if self.rect.x <= 0 or self.rect.x >= self.screen_rect.right:
             self.direction *= -1
         self.rect.x += 1 * self.direction
     
-    def draw_bullet(self):
-        """Draw the bullet to the screen."""
+    def draw_block(self):
+        """Draw the block to the screen."""
         pygame.draw.rect(self.screen, (255, 255, 255), self.rect)
