@@ -20,8 +20,7 @@ class Entry(models.Model):
 
     def __str__(self) -> str:
         """Return a simple string representing the entry."""
-        if self.text < 51:
+        if len(self.text) < 51:
             return self.text
-            # return f"{self.topic}: {self.text}
         else:
             return f"{self.text[:50]}..."
